@@ -20,13 +20,17 @@ aws-automation-suite/
 │
 ├── README.md                          # Comprehensive documentation
 ├── assignment-1-ec2-scheduler/
-│   └── lambda_function.py             # Nightly Stop / Morning Start script
+│   ├── lambda_function.py             # Nightly Stop / Morning Start script
+│   └── policy.json                    # Inline least-privilege IAM policy
 ├── assignment-2-ebs-cleanup/
-│   └── lambda_function.py             # Unattached volume cleaner
+│   ├── lambda_function.py             # Unattached volume cleaner
+│   └── policy.json                    # Inline least-privilege IAM policy
 ├── assignment-3-s3-cleanup/
-│   └── lambda_function.py             # Stale file lifecycle cleaner
+│   ├── lambda_function.py             # Stale file lifecycle cleaner
+│   └── policy.json                    # Inline least-privilege IAM policy
 ├── assignment-4-auto-tagger/
-│   └── lambda_function.py             # Auto-tagger on instance launch
+│   ├── lambda_function.py             # Auto-tagger on instance launch
+│   └── policy.json                    # Inline least-privilege IAM policy
 └── screenshots/                       # Verification evidence
     ├── assignment-1/
     ├── assignment-2/
