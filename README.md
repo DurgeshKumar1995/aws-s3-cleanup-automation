@@ -49,5 +49,5 @@ Automates stopping dev EC2 instances at night and starting them in the morning b
 ### EventBridge Configuration
 ```Nightly Stop: Cron cron(0 19 * * ? *) | JSON Payload: {"action": "STOP"}```
 
-```Morning Start: Cron cron(0 7 * * ? *) | JSON Payload: {"action": "START"}``
+```Morning Start: Cron cron(0 7 * * ? *) | JSON Payload: {"action": "START"}```
 
