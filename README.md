@@ -130,4 +130,20 @@ This solution delivers an automated billing monitoring solution using **AWS Lamb
                                                           │
                                                           ▼
                                                   [ Amazon SNS Topic ] ──> [ Email Alert ]
+```
 
+## 📌 Assignment 5:
+# AWS Automation: Restore an EC2 Instance from the Latest Snapshot
+
+## 📌 Project Overview
+This solution implements an automated **Disaster Recovery (DR)** workflow using **AWS Lambda (Python 3.12)** and **Boto3**. Given a target EBS Volume ID, the function automatically locates the most recent point-in-time snapshot, registers a bootable Amazon Machine Image (AMI), launches a new EC2 instance from that AMI, and tags it with operational metadata (`RestoredFrom=<snapshot-id>`).
+
+---
+
+## 🛠️ Architecture & Workflow
+
+```text
+[ Trigger / DR Event ] ──> [ AWS Lambda ] ──> 1. Find Latest EBS Snapshot (ec2:DescribeSnapshots)
+                                          ──> 2. Register Custom AMI (ec2:RegisterImage)
+                                          ──> 3. Wait until AMI is Available
+                                          ──> 4. Launch Restored EC2 Instance (ec2:RunInstances)
