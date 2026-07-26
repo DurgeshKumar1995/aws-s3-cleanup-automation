@@ -9,24 +9,23 @@
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/EC2AutoTaggerFunction:*"
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/CostAlertFunction:*"
     },
     {
-      "Sid": "EC2TaggingPermissions",
+      "Sid": "CostExplorerPermissions",
       "Effect": "Allow",
       "Action": [
-        "ec2:CreateTags",
-        "ec2:DescribeInstances"
+        "ce:GetCostAndUsage"
       ],
       "Resource": "*"
     },
     {
-      "Sid": "CloudTrailLookupBonusPermission",
+      "Sid": "SNSPublishPermissions",
       "Effect": "Allow",
       "Action": [
-        "cloudtrail:LookupEvents"
+        "sns:Publish"
       ],
-      "Resource": "*"
+      "Resource": "arn:aws:sns:us-east-1:YOUR_ACCOUNT_ID:AWS-Daily-Cost-Alerts"
     }
   ]
 }

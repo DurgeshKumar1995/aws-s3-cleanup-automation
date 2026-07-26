@@ -113,3 +113,21 @@ This solution delivers an event-driven compliance pattern using **AWS Lambda (Py
                                                                └── (Optional) CloudTrail User Lookup
 ```
 
+## 📌 Assignment 4:
+## AWS Automation: Daily AWS Cost Alert Using Cost Explorer API and SNS
+
+## 📌 Project Overview
+This solution delivers an automated billing monitoring solution using **AWS Lambda (Python 3.12)**, **Boto3**, **AWS Cost Explorer API**, and **Amazon SNS**. It queries month-to-date (MTD) unblended costs daily and sends immediate email notifications via SNS when spending exceeds a defined threshold.
+
+---
+
+## 🛠️ Architecture & Workflow
+
+```text
+[ EventBridge Cron Rule ] ──(Daily Trigger)──> [ AWS Lambda ] ──> [ Cost Explorer API ]
+   └── cron(0 8 * * ? *)                         │                  (ce:GetCostAndUsage)
+                                                 └── (If Spend > $50)
+                                                          │
+                                                          ▼
+                                                  [ Amazon SNS Topic ] ──> [ Email Alert ]
+
