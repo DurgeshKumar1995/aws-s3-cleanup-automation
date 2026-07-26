@@ -9,24 +9,26 @@
         "logs:CreateLogStream",
         "logs:PutLogEvents"
       ],
-      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/EC2AutoTaggerFunction:*"
+      "Resource": "arn:aws:logs:*:*:log-group:/aws/lambda/S3PublicAccessAuditFunction:*"
     },
     {
-      "Sid": "EC2TaggingPermissions",
+      "Sid": "S3AuditReadPermissions",
       "Effect": "Allow",
       "Action": [
-        "ec2:CreateTags",
-        "ec2:DescribeInstances"
+        "s3:ListAllMyBuckets",
+        "s3:GetBucketPublicAccessBlock",
+        "s3:GetBucketPolicyStatus",
+        "s3:GetBucketAcl"
       ],
       "Resource": "*"
     },
     {
-      "Sid": "CloudTrailLookupBonusPermission",
+      "Sid": "SNSPublishPermissions",
       "Effect": "Allow",
       "Action": [
-        "cloudtrail:LookupEvents"
+        "sns:Publish"
       ],
-      "Resource": "*"
+      "Resource": "arn:aws:sns:*:*:S3-Public-Access-Security-Alerts"
     }
   ]
 }

@@ -65,7 +65,7 @@ Automates stopping dev EC2 instances at night and starting them in the morning b
 
 
 ## 📌 Assignment 1:
-# AWS Automation: Automated S3 Bucket Cleanup (Objects > 30 Days)
+## AWS Automation: Automated S3 Bucket Cleanup (Objects > 30 Days)
 
 ## 📌 Project Overview
 This project delivers a serverless, automated cleanup pattern built with **AWS Lambda (Python 3.12)**, **Boto3**, and **Amazon EventBridge**. It periodically scans a targeted Amazon S3 bucket, compares each object's UTC timestamp (`LastModified`) against a 30-day threshold, and deletes stale files. This prevents unbounded storage growth and lowers AWS monthly costs.
@@ -99,7 +99,7 @@ This solution automates EBS volume backups and lifecycle retention using **AWS L
 ```
 
 ## 📌 Assignment 3:
-# AWS Automation: Auto-Tagging EC2 Instances on Launch
+## AWS Automation: Auto-Tagging EC2 Instances on Launch
 
 ## 📌 Project Overview
 This solution delivers an event-driven compliance pattern using **AWS Lambda (Python 3.12)**, **Boto3**, and **Amazon EventBridge**. Whenever a new EC2 instance enters the `running` state, EventBridge triggers Lambda to instantly enrich the instance with standardized metadata (`LaunchDate`, `Environment`, `ManagedBy`, `Owner`).
@@ -133,7 +133,7 @@ This solution delivers an automated billing monitoring solution using **AWS Lamb
 ```
 
 ## 📌 Assignment 5:
-# AWS Automation: Restore an EC2 Instance from the Latest Snapshot
+## AWS Automation: Restore an EC2 Instance from the Latest Snapshot
 
 ## 📌 Project Overview
 This solution implements an automated **Disaster Recovery (DR)** workflow using **AWS Lambda (Python 3.12)** and **Boto3**. Given a target EBS Volume ID, the function automatically locates the most recent point-in-time snapshot, registers a bootable Amazon Machine Image (AMI), launches a new EC2 instance from that AMI, and tags it with operational metadata (`RestoredFrom=<snapshot-id>`).
@@ -147,3 +147,28 @@ This solution implements an automated **Disaster Recovery (DR)** workflow using 
                                           ──> 2. Register Custom AMI (ec2:RegisterImage)
                                           ──> 3. Wait until AMI is Available
                                           ──> 4. Launch Restored EC2 Instance (ec2:RunInstances)
+```
+
+## 📌 Assignment 6:
+# AWS Automation: Audit S3 Buckets for Public Access and Notify
+
+## 📌 Project Overview
+This solution implements an automated S3 security audit pipeline using **AWS Lambda (Python 3.12)**, **Boto3**, and **Amazon SNS**. Because modern S3 buckets use multi-layered security controls, the function audits three independent layers:
+1. **Block Public Access (BPA)** bucket configurations.
+2. **Bucket Policy Status** (`IsPublic` flag via `get_bucket_policy_status`).
+3. **Bucket ACL Grants** (`AllUsers` public group permissions).
+
+If any public exposure is detected, Lambda sends an immediate email alert via SNS detailing the exact security findings.
+
+---
+
+## 🛠️ Architecture & Workflow
+
+```text
+[ EventBridge Cron Rule ] ──(Daily Trigger)──> [ AWS Lambda ] ──> 1. List All Buckets
+   └── cron(0 6 * * ? *)                         │                  2. Check BPA, Policy & ACLs
+                                                 └── (If Public Bucket Found)
+                                                          │
+                                                          ▼
+                                                  [ Amazon SNS Topic ] ──> [ Security Email Alert ]                                          
+```
