@@ -19,7 +19,10 @@ This repository contains production-ready serverless automation solutions built 
 aws-automation-suite/
 │
 ├── README.md                          # Comprehensive documentation
-├── assignment-1-ec2-scheduler/
+├── ec2-scheduler /
+│   ├── lambda_function.py             # Nightly Stop / Morning Start script
+│   └── policy.json                    # Inline least-privilege IAM policy
+├── assignment-1-s3-bucket-cleanup/
 │   ├── lambda_function.py             # Nightly Stop / Morning Start script
 │   └── policy.json                    # Inline least-privilege IAM policy
 ├── assignment-2-ebs-cleanup/
@@ -35,7 +38,8 @@ aws-automation-suite/
     ├── assignment-1/
     ├── assignment-2/
     ├── assignment-3/
-    └── assignment-4/
+    ├── assignment-4/
+    └── ec2-scheduler/
 
 ```
 
@@ -50,4 +54,7 @@ Automates stopping dev EC2 instances at night and starting them in the morning b
 ```Nightly Stop: Cron cron(0 19 * * ? *) | JSON Payload: {"action": "STOP"}```
 
 ```Morning Start: Cron cron(0 7 * * ? *) | JSON Payload: {"action": "START"}```
+
+
+## 📌 Assignment 1:
 
